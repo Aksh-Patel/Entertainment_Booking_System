@@ -1,0 +1,101 @@
+event_id,type_id,event_name,price,event_date,location,time,duration,total_tickets,tickets_left,rating
+1,1,Commander Of Moondust,177,22-01-2021,Ahmedabad,06:00:00,3,8,6,1
+2,1,Droid Of Aliens,208,07-11-2021,Surat,12:00:00,2,6,5,3
+3,1,Officer Of Space,107,02-02-2021,Ludiana,04:00:00,1,9,8,5
+4,1,Assassin Of Everywhere,361,13-07-2021,Chennai,11:00:00,1,8,7,4
+5,1,Girl Of The Void,239,22-12-2021,Ambala,10:00:00,2,6,5,2
+6,1,Hunter With A UFO,407,05-11-2021,Tamil Nadu,07:00:00,2,5,4,1
+7,1,Girl Of Space,149,11-12-2021,Bangalore,01:00:00,3,8,7,3
+8,1,Guest Of Our Ship,412,25-11-2021,Ahmedabad,11:00:00,2,5,4,5
+9,1,Doctors Of The Ocean,167,13-08-2021,Madras,03:00:00,1,7,6,4
+10,1,Foreigners Of Moondust,413,14-01-2021,Jammu And Kashmir,08:00:00,2,5,4,2
+11,1,Children Of New Worlds,337,03-03-2021,Ahmedabad,10:00:00,1,9,8,1
+12,1,Officers Of The Worlds,220,08-09-2021,Bangalore,12:00:00,2,9,8,3
+13,1,Men Of Life,326,08-12-2021,Punjab,07:00:00,1,10,9,5
+14,1,Droids Of The Outlands,292,03-04-2021,Jaipur,03:00:00,2,8,7,4
+15,1,Pilots Of Our Culture,338,04-01-2021,Shimla,04:00:00,3,10,9,2
+16,1,Leaders Of Mars,363,08-04-2021,Jaipur,09:00:00,2,6,5,1
+17,1,Emperors And,318,08-02-2021,Shimla,07:00:00,1,10,9,3
+18,1,Assassins And Beasts,258,15-08-2021,Bangalore,04:00:00,3,7,6,5
+19,1,Emperors And Commanders,185,21-07-2021,Shimla,08:00:00,2,10,9,4
+20,1,Hunters And Spies,227,23-08-2021,Jaipur,11:00:00,1,9,8,2
+21,1,Foreigners And Children,368,10-06-2021,Ahmedabad,10:00:00,3,9,8,1
+22,1,Friends And Veterans,434,24-05-2021,Manali,05:00:00,2,8,7,3
+23,1,Humans And Women,468,09-06-2021,Dharamshala,12:00:00,1,10,9,5
+24,1,Robots And Traitors,270,11-07-2021,Shimla,03:00:00,5,6,5,4
+25,1,Destiny Of Moondust,419,02-10-2021,Bangalore,02:00:00,6,5,4,2
+26,1,Monuments Of Stardust,118,27-05-2021,Dharamshala,04:00:00,2,7,6,1
+27,1,World Of Everywhere,478,14-03-2021,Rajkot,03:00:00,1,10,9,3
+28,1,Scourge Of The Galaxy,161,17-12-2021,Jaipur,01:00:00,3,8,7,5
+29,1,Destiny Of Men's Legacy,183,06-09-2021,Hyderabad,02:00:00,3,10,9,4
+30,1,Inception Of Alien Life,377,26-10-2021,Manali,09:00:00,1,6,5,2
+31,1,Battle Of Life Of Society,252,18-12-2021,Gurgaon,03:00:00,2,7,7,1
+32,1,Broken Aliens,132,07-07-2021,Jaipur,10:00:00,3,6,6,3
+33,1,Favor Of The Eyes,261,14-03-2021,Ahmedabad,01:00:00,2,9,9,5
+34,1,Courage For Droids,157,02-03-2021,Manali,02:00:00,1,9,9,4
+35,1,Devoted To The New World,240,03-04-2021,Dharamshala,06:00:00,2,5,5,2
+36,1,Confused By The Stars,295,17-11-2021,Bangalore,11:00:00,3,5,5,1
+37,1,Hidden By The Stars,127,23-01-2021,Manali,09:00:00,3,9,9,3
+38,1,Lost In The Aliens,216,05-08-2021,Surat,02:00:00,2,8,8,5
+39,1,Life In Androids,201,09-05-2021,Manali,05:00:00,1,7,7,4
+40,1,Sooryavanshi,358,08-11-2021,Surat,05:00:00,2,10,10,2
+41,2,The FIFA World Cup. 25 of 25.,423,14-02-2021,Jaipur,05:00:00,3,8,7,1
+42,2,The Olympic Games. 24 of 25. ...,299,14-12-2021,Bangalore,11:00:00,6,5,4,3
+43,2,"The 24 Hours of Le Mans, France. 23 of 25. ...",116,10-06-2021,Gurgaon,08:00:00,2,9,8,5
+44,2,"The Super Bowl, United States. 22 of 25. ...",290,14-09-2021,Hyderabad,03:00:00,1,10,9,4
+45,2,"The Grand National, England. 21 of 25. ...",470,04-03-2021,Gurgaon,03:00:00,2,5,4,2
+46,2,"The Masters Tournament, United States. 20 of 25. ...",173,20-04-2021,Surat,03:00:00,3,8,7,1
+47,2,"Polo at Palermo, Argentina. ...",385,19-08-2021,Bangalore,09:00:00,3,10,9,3
+48,2,"Wimbledon, England",331,27-05-2021,Hyderabad,05:00:00,2,10,9,5
+49,2,Super Bowl,330,15-10-2021,Gurgaon,07:00:00,1,5,4,4
+50,2,World Series,500,11-05-2021,Jaipur,08:00:00,2,5,4,2
+51,2,NCAA Final Four,427,19-08-2021,Hyderabad,03:00:00,3,5,4,1
+52,2,NBA Finals,122,11-12-2021,Bangalore,09:00:00,2,7,6,3
+53,2,The Masters,315,18-01-2021,Mumbai,10:00:00,1,7,6,5
+54,2,World Cup of Rugby,485,25-05-2021,Hyderabad,11:00:00,2,6,5,4
+55,2,Wimbledon,381,04-01-2021,Kanyakumari,10:00:00,3,7,6,2
+56,2,FIFA World Cup.,230,14-11-2021,Jaipur,08:00:00,3,7,6,1
+57,2,Olympic Games.,253,12-01-2021,Gurgaon,05:00:00,2,6,5,3
+58,2,The UEFA Champions League.,286,14-02-2021,Bangalore,07:00:00,5,9,8,5
+59,2,Cricket World Cup.,145,20-02-2021,Hyderabad,08:00:00,2,8,7,4
+60,2,Super Bowl.,164,25-06-2021,Punjab,02:00:00,2,5,4,2
+61,3,The Rolling Stones,290,19-09-2021,Jaipur,03:00:00,1,5,4,1
+62,3,Arijit singh,228,24-09-2021,Gurgaon,09:00:00,3,10,9,3
+63,3,Darshan raval,424,08-03-2021,Hyderabad,07:00:00,3,10,9,5
+64,3,Amit Trivedi,382,21-01-2021,Bangalore,04:00:00,2,9,8,4
+65,3,Guru,292,25-02-2021,Mumbai,08:00:00,1,9,8,2
+66,3,Sharma bhajan,495,22-09-2021,Jaipur,06:00:00,1,10,9,1
+67,3,A R Rahman,482,21-05-2021,Delhi,04:00:00,2,8,7,3
+68,3,Badshah,358,27-07-2021,Gurgaon,02:00:00,3,8,7,5
+69,3,Honey singh,441,20-10-2021,Hyderabad,11:00:00,3,5,4,4
+70,3,Sonu Nigam,103,04-03-2021,Manali,10:00:00,2,6,5,2
+71,4,A Promised Land by Barack Obama. ...,317,01-01-2021,Jaipur,04:00:00,1,10,9,1
+72,4,What Are You Going Through by Sigrid Nunez. ...,368,13-12-2021,Gurgaon,12:00:00,2,8,7,3
+73,4,Notes on a Silencing by Lacy Crawford. ...,356,21-04-2021,Bangalore,09:00:00,1,9,8,5
+74,4,Caste by Isabel Wilkerson. ...,424,28-07-2021,Hyderabad,01:00:00,2,7,6,4
+75,4,Writers & Lovers by Lily King. ...,223,08-04-2021,Jaipur,08:00:00,3,9,8,2
+76,4,Monogamy by Sue Miller. ...,241,12-11-2021,Delhi,02:00:00,2,7,6,1
+77,4,The Vanishing Half by Brit Bennett. ...,342,04-10-2021,Gurgaon,01:00:00,1,5,4,3
+78,4,The Lying Life of Adults by Elena Ferrante,394,07-09-2021,Hyderabad,04:00:00,2,10,9,5
+79,4,Harry Potter,348,21-10-2021,Jaipur,04:00:00,3,10,9,4
+80,4,Wimpy kid,182,01-02-2021,Bangalore,11:00:00,2,7,6,2
+81,4,Om biography,301,26-08-2021,Gurgaon,01:00:00,1,9,8,1
+82,4,Ulysses by James Joyce,239,09-08-2021,Udaipur,05:00:00,1,5,4,3
+83,4,Don Quixote by Miguel de Cervantes,235,03-06-2021,Jaipur,05:00:00,2,9,8,5
+84,4,One Hundred Years of Solitude by Gabriel Garcia Marquez,375,24-07-2021,Bangalore,11:00:00,3,10,9,4
+85,4,The Great Gatsby by F,325,19-09-2021,Udaipur,05:00:00,2,7,6,2
+86,4,Moby Dick by Herman Melville,370,21-01-2021,Hyderabad,09:00:00,1,5,4,1
+87,4,War and Peace by Leo Tolstoy,408,11-07-2021,Udaipur,08:00:00,2,6,5,3
+88,4,Ronels journey to cto,385,08-06-2021,Jaipur,01:00:00,3,10,9,5
+89,4,Alchemist,331,03-09-2021,Gurgaon,07:00:00,1,6,5,4
+90,4,Half girlfriend,128,16-10-2021,Delhi,08:00:00,2,8,7,2
+91,4,Flames,350,01-08-2021,Bangalore,01:00:00,3,6,6,1
+92,4,Medic Of Stardust,331,23-10-2021,Udaipur,09:00:00,2,6,6,3
+93,4,Defender Of Our Ship,348,19-07-2021,Gurgaon,07:00:00,1,6,6,5
+94,4,Leader In The Beginning Of Time,337,02-09-2021,Jaipur,10:00:00,2,10,10,4
+95,4,Officer Of The Crash,445,23-06-2021,Bangalore,08:00:00,3,5,5,2
+96,4,Guests Of The Ocean,424,17-08-2021,Hyderabad,06:00:00,2,6,6,1
+97,4,Doctors With Four Eyes,448,09-11-2021,Gurgaon,05:00:00,1,5,5,3
+98,4,Officers In The Portal,455,24-03-2021,Bangalore,02:00:00,2,5,5,5
+99,4,Hunters Of The Worlds,266,12-11-2021,Jaipur,02:00:00,3,6,6,4
+100,4,Assassins And Children,210,14-07-2021,Ahmedabad,10:00:00,2,5,5,2

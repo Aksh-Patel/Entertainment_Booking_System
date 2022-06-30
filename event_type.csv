@@ -1,0 +1,5 @@
+type_id,m_id,type_name,no_of_shows
+1,1,movies,40
+2,2,sports,20
+3,3,concerts,10
+4,4,audio_launch,30

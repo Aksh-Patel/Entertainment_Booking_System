@@ -1,0 +1,337 @@
+SET SEARCH_PATH TO main_db
+
+CREATE TABLE manager
+(
+ 	m_id int NOT NULL,
+    m_name varchar(30),
+   	m_email varchar(30),
+	m_mob_no bigint,
+    PRIMARY KEY(m_id)
+)  
+
+CREATE TABLE customer
+(
+    c_id int NOT NULL,
+	c_name varchar(30),
+	c_email varchar(30),
+	c_mob_no bigint,
+	PRIMARY KEY(c_id)
+)
+
+CREATE TABLE event_type
+(
+ 	type_id int NOT NULL,
+ 	m_id int,
+ 	type_name varchar(30),
+    no_of_shows int,
+    PRIMARY KEY(type_id),
+    FOREIGN KEY(m_id) REFERENCES manager
+)
+
+CREATE TABLE event_details
+(
+    event_id int NOT NULL,
+    type_id int,
+	event_name varchar(100),
+	price int,
+	event_date date,
+	location varchar(30),
+	event_time time,
+	duration int,
+	total_tickets int,
+	tickets_left int,
+	rating int check(rating<=5 and rating>=1),
+	PRIMARY KEY(event_id),
+	FOREIGN KEY(type_id) REFERENCES event_type
+)
+
+CREATE TABLE event_booked
+(
+    id int NOT NULL,
+	c_id int,
+	event_id int,
+	booking_date date,
+	tickets_booked int,
+	PRIMARY KEY(id),
+	FOREIGN KEY(c_id) REFERENCES customer,
+	FOREIGN KEY(event_id) REFERENCES event_details
+)
+
+CREATE TABLE seats_left 
+(
+    event_id int NOT NULL,
+    seat_no int,
+    PRIMARY KEY(event_id,seat_no),
+	FOREIGN KEY(event_id) REFERENCES event_details
+)
+  
+CREATE TABLE seat_booked 
+(
+    id int NOT NULL,
+    seat_no int,
+    PRIMARY KEY(id,seat_no),
+	FOREIGN KEY(id) REFERENCES event_booked
+)
+
+COPY main_db.manager (m_id,m_name,m_email,m_mob_no) 
+FROM 'D:\DBMS Lab\Lab8\manager.csv'
+DELIMITER ',' CSV HEADER;
+
+COPY main_db.event_type (type_id, m_id, type_name, no_of_shows) 
+FROM 'D:\DBMS Lab\Lab8\event_type.csv'
+DELIMITER ',' CSV HEADER;
+
+COPY main_db.customer (c_id,c_name,c_email,c_mob_no) 
+FROM 'D:\DBMS Lab\Lab8\customer.csv'
+DELIMITER ',' CSV HEADER;
+
+COPY main_db.event_details (event_id,type_id,event_name,price,event_date,location,event_time,duration,total_tickets,tickets_left,rating) 
+FROM 'D:\DBMS Lab\Lab8\event_details.csv'
+DELIMITER ',' CSV HEADER;
+
+COPY main_db.event_booked (id,c_id,event_id,booking_date,tickets_booked) 
+FROM 'D:\DBMS Lab\Lab8\event_booked.csv'
+DELIMITER ',' CSV HEADER;
+
+COPY main_db.seats_left (event_id,seat_no) 
+FROM 'D:\DBMS Lab\Lab8\seats_left.csv'
+DELIMITER ',' CSV HEADER;
+
+COPY main_db.seat_booked (id,seat_no) 
+FROM 'D:\DBMS Lab\Lab8\seat_booked.csv'
+DELIMITER ',' CSV HEADER;
+
+SELECT * FROM manager
+SELECT * FROM customer
+SELECT * FROM event_type
+SELECT * FROM event_details
+SELECT * FROM event_booked
+SELECT * FROM seats_left
+SELECT * FROM seat_booked
+
+--Lab9 Queries
+
+-- Other Queries
+
+-- 1. Find number of shows of event_type ‘sports’.
+select no_of_shows from event_type
+where type_name='sports'
+
+-- 2. Find all the events in Ahmedabad.
+select * from event_details
+where location='Ahmedabad'
+
+-- 3. Finding the event_name having the maximum price.
+select event_name from event_details
+where price = (select max(price) from event_details)
+
+-- 4. Find all events on a particular date.
+select event_name from event_details
+where event_date = '2021-01-22'
+
+-- 5. Find all the events in the month of January.
+select event_name from event_details
+where extract (month from event_date) = 1
+
+-- 6. Find the number of events having duration more than 2hrs.
+select count(event_name) from event_details
+where duration>2
+
+-- 7. Find the event details having ratings more than 3.
+select * from event_details
+where rating>3
+
+-- 8. Find event_name where number of left tickets is more than 5
+select event_name,total_tickets,tickets_left from event_details
+where tickets_left>5
+
+-- 9. Find details of manager whose name is Aksh Patel
+select * from manager
+where m_name='Aksh Patel'
+
+-- 10. Find total price of all the tickets of all events
+select sum(total_tickets*price) from event_details
+
+-- 11. Find name of manager of event_type ‘movies’
+select m_name from manager
+natural join event_type
+where type_name='movies'
+
+-- 12. Find the manager id and name of the event ‘Doctors Of The Ocean’.
+select m_id,m_name from manager
+natural join event_type
+natural join event_details
+where event_name = 'Doctors Of The Ocean'
+
+-- 13.  Find the net total worth of all the event types
+select type_name,sum(total_tickets*price) as net_worth from event_details
+natural join event_type
+group by type_id,type_name
+order by net_worth desc
+
+-- 14. Find the cheapest event of type ‘concert’ in Bangalore.
+select event_name from event_details
+where price = (select min(price) from event_details natural join event_type
+					where location = 'Bangalore' and type_name = 'concerts')
+
+-- Booking an event as a customer
+
+-- 15. Create a trigger which calls when any insert is done in the event_booked table 
+--      which updates tickets left in event_details.
+CREATE OR REPLACE FUNCTION Trigger_Function()
+RETURNS trigger
+LANGUAGE 'plpgsql'
+AS 
+$BODY$
+BEGIN
+	UPDATE event_details set tickets_left = tickets_left - new.tickets_booked
+	where event_id = new.event_id;
+	raise notice 'Avaliable tickets are updated....';
+	return new;
+end
+$BODY$;
+
+CREATE TRIGGER Trigger_Total_Tickets_Update
+AFTER INSERT
+ON event_booked 
+FOR EACH ROW
+WHEN (pg_trigger_depth()<1)--!
+EXECUTE FUNCTION Trigger_Function();
+
+insert into event_booked(id,c_id,event_id,booking_date,tickets_booked) 
+values(81,1,1,'18-11-2021',1);
+
+-- 16. Find customers who had booked most tickets.
+create or replace view Tickets_Booked as
+select sum(tickets_booked) as total from event_booked
+group by c_id
+
+select c_name,sum(tickets_booked) as Tickets_Booked from customer
+natural join event_booked
+group by c_id,c_name
+having sum(tickets_booked) = (select max(total) from Tickets_Booked)
+
+-- 17. Update email of manager ‘Aksh Patel’ to ‘ap12345@gmail.com’
+UPDATE manager
+set m_email = 'ap12345@gmail.com'
+where m_name = 'Aksh Patel'
+
+-- 18. Update name of event ‘Sharma bhajan’ to ‘SB Group’
+UPDATE event_details
+set event_name = 'SB Group'
+where event_name = 'Sharma bhajan'
+
+--19. Provide event wise sum of prices of tickets in that event
+SELECT type_name,SUM(total_tickets*price) FROM event_type 
+NATURAL JOIN event_details group by type_id
+
+--20. Find the total sum of amount paid by each customer
+SELECT c_name,SUM(tickets_booked*price) as amount_paid FROM event_booked 
+NATURAL JOIN customer NATURAL JOIN
+event_details group by c_name
+
+--21. Provide the number of tickets left on particular date in increasing order
+SELECT event_date,SUM(tickets_left) FROM event_details 
+group by event_date order by event_date
+
+--22. Find a name of the manager in decreasing order according to the number of
+--    events handled by them .
+SELECT m_name,COUNT(*) FROM event_type NATURAL JOIN manager 
+NATURAL JOIN event_details group by m_name
+order by COUNT(*) DESC
+
+--23. Find the name of the event all where the number of tickets booked is maximum.
+SELECT event_name FROM event_details 
+where total_tickets-tickets_left = 
+(SELECT max(total_tickets-tickets_left) FROM event_details) 
+
+--24. Find total number of tickets booked by each customer in decreasing order 
+
+CREATE OR REPLACE FUNCTION find_no_of_tickets_booked()
+returns table (c_name varchar(30),no_of_tickets_booked bigint) 
+language 'plpgsql'
+as
+$body$
+BEGIN
+RETURN QUERY EXECUTE format ('SELECT c_name,COUNT(*) as no_of_tickets_booked FROM customer 
+NATURAL JOIN event_booked NATURAL JOIN event_details
+group by c_name ORDER BY COUNT(*) DESC');
+END
+$body$
+SELECT "main_db".find_no_of_tickets_booked();
+
+--25. Insert a new customer to our database
+INSERT INTO customer values(81,'Alex Dod','aldo@gmail.com',1293021982)
+
+--26. Insert a new manager to our database
+INSERT INTO manager values(5,'Eric Kumar','erikaa@gmail.com',3209129823)
+
+--27. print details of customers who have booked sport events
+select customer.c_name, customer.c_email, customer.c_mob_no
+from event_booked natural join customer natural join event_details natural join event_type
+where event_type.type_name = 'sports'
+
+--28. print names of movies having tickets_left greater than 7
+select event_details.event_name , event_details.tickets_left
+from event_details natural join event_type
+where event_details.tickets_left > 7 and event_type.type_name='movies'
+
+--29. print names of customers who have booked concerts which have rating more than 3
+select customer.c_name,event_details.event_name,event_details.rating
+from event_booked natural join customer natural join event_details natural join event_type
+where event_type.type_name='concerts' and event_details.rating>3
+
+--30. print number of tickets booked of different type of shows on date 2021-12-22
+select event_type.type_name,count(event_id)
+from event_details natural join event_type
+where event_date='2021-12-22'
+group by event_type.type_name
+
+--31. print manager details managing different event types 
+select manager.m_name , manager.m_email , manager.m_mob_no , event_type.type_name
+from manager natural join event_type
+
+--32. Print number of events managed by a particular manager (Vishal)
+select manager.m_name ,event_type.type_name , event_type.no_of_shows
+from manager natural join event_type 
+where manager.m_name='Vishal Tekwani'
+
+--33. Provide the event type name average price.
+select event_type.type_name,avg(price)
+from event_details natural join event_type
+group by event_type.type_name
+
+--34. Find the total number of tickets left of a particular event type in descending order
+select event_type.type_name,sum(tickets_left) as no_of_tickets_left
+from event_details natural join event_type
+group by event_type.type_name 
+order by sum(tickets_left) desc
+
+--35. Find all managers managing more than 10 events.
+select manager.m_id , manager.m_name , event_type.no_of_shows
+from manager natural join event_type
+where event_type.no_of_shows>10
+
+--36. Provide a customer-manager pair for each customer.
+select manager.m_name, customer.c_name
+from manager natural join event_type natural join event_details natural join event_booked natural join customer
+
+--37 Find email ids of customers of particular event (Girl Of The Void).
+select customer.c_email
+from customer natural join event_booked natural join event_details
+where event_details.event_name='Girl Of The Void'
+
+--38 Provide customer names and their email managed by manager Om
+select customer.c_name , customer.c_email
+from manager natural join event_type natural join event_details natural join event_booked natural join customer
+where manager.m_name='Om Patel'
+
+--39 Find the total number of events in every location.(using group by)
+select event_details.location , count(*) as number_of_events
+from event_details
+group by event_details.location
+
+--40. Increase price of all the tickets by 20% whose rating is >4
+update event_details
+set price=price+0.2*price
+where rating>3
