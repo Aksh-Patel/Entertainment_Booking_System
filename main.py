@@ -22,6 +22,7 @@ print(db_version)
 
 # # Query 2
 ch="select * from main_db.manager order by m_id"
+# ch = input('Enter the query you want to execute:\n')
 print(ch)
 cursor.execute(ch)
 rows=cursor.fetchall()
@@ -36,7 +37,7 @@ cursor.execute(ch)
 rows=cursor.fetchall()
 for r in rows:
     print("event_id = ",r[0], " type_id= ",r[1] , "event_name= ",r[2] ,"price= ",r[3] ,"event_date= ",r[4] ,"location= ",r[5] ,"event_time= ",r[6],"duration= ",r[7] ,"total_tickets= ",r[8] ,"tickets_left= ",r[9] ,"rating= ",r[10])
-    
+
 
 # Query 4
 while(1):
@@ -67,7 +68,7 @@ while(1):
         rows=cursor.fetchall()
         for r in rows:
             for c in r:
-                print(c,end='  ')
+                print(c,end=',  ')
             print()
     elif choice == 3:
         print('event_types details')
